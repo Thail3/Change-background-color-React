@@ -1,23 +1,49 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import "./App.css";
 
 function App() {
+  const [changeColor, setChangeColor] = useState("");
+
+  useEffect(() => {
+    setChangeColor();
+  }, []);
+
+  const randomRGB = () => Math.floor(Math.random() * 256);
+  const getRandomColor = () =>
+    "rgb(" + randomRGB() + "," + randomRGB() + "," + randomRGB() + ")";
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <nav className="Navbar">
+        <h4>Color Filpper</h4>
+        <div className="nav-links">
+          <p>Simple</p>
+
+          <a href="App.js">hex</a>
+        </div>
+      </nav>
+      <main>
+        <div
+          className="container"
+          style={{ backgroundColor: `${changeColor}` }}
         >
-          Learn React
-        </a>
-      </header>
+          <div>
+            <h2>
+              Backgroud Color : <span className="color">{changeColor}</span>
+            </h2>
+          </div>
+
+          <div>
+            <button
+              className="btn btn-hero"
+              id="btn"
+              onClick={() => setChangeColor(getRandomColor)}
+            >
+              CLICK ME
+            </button>
+          </div>
+        </div>
+      </main>
     </div>
   );
 }
